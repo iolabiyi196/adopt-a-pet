@@ -1,36 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { getPetDetails } from '../../api/petfinder';
-import Hero from '../../components/hero';
+import React, { useEffect, useState } from 'react'
+import { getPetDetails } from '../../api/petfinder'
+import Hero from '../../components/hero'
+import { useParams, Redirect } from 'react-router-dom'
+import PetDetailsNotFound from '../petDetailsNotFound'
 
 const PetDetailsPage = () => {
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const id = '51322435'; // <--- Update me!
+  const [data, setData] = useState()
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+  const { id } = useParams() // <--- Update me!
 
   useEffect(() => {
     async function getPetsData() {
       try {
-        const petsData = await getPetDetails(id);
-        setData(petsData);
-        setError(false);
+        const petsData = await getPetDetails(id)
+        setData(petsData)
+        setError(false)
       } catch (e) {
-        setError(true);
+        setError(true)
       }
-      setLoading(false);
+      setLoading(false)
     }
 
-    getPetsData();
-  }, [id]);
+    getPetsData()
+  }, [id])
 
   return (
     <div>
       {loading ? (
         <h3>Loading...</h3>
       ) : error ? (
-        <div>
-          {/* Redirect to /pet-details-not-found if there was an error! */}
-        </div>
+        <Redirect>
+          <PetDetailsNotFound />
+        </Redirect>
       ) : (
         <main>
           <Hero
@@ -59,7 +61,7 @@ const PetDetailsPage = () => {
         </main>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default PetDetailsPage;
+export default PetDetailsPage

@@ -1,16 +1,24 @@
-import HomePage from './pages/home';
-import SearchPage from './pages/search';
-import PetDetailsPage from './pages/detail';
-import PetDetailsNotFound from './pages/petDetailsNotFound';
-import Navigation from './components/navigation';
+import HomePage from './pages/home'
+import SearchPage from './pages/search'
+import PetDetailsPage from './pages/detail'
+import PetDetailsNotFound from './pages/petDetailsNotFound'
+import Navigation from './components/navigation'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 function App() {
   return (
-    <div>
+    <Router>
       <Navigation />
-      <HomePage />
-    </div>
-  );
+      <Switch>
+        <Route path="/:type/:id">
+          <PetDetailsPage />
+        </Route>
+        <Route path="/:type?">
+          <HomePage />
+        </Route>
+      </Switch>
+    </Router>
+  )
 }
 
-export default App;
+export default App

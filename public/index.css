@@ -7,13 +7,14 @@
 
 .nav-links {
   padding: 12px 180px;
-  background: #56009b;
   color: white;
+  background: #56009b;
   list-style: none;
   display: flex;
   justify-content: space-around;
   margin: 0;
 }
+
 
 .nav-link {
   color: white;
