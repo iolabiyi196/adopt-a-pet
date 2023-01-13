@@ -30,7 +30,7 @@ const PetDetailsPage = () => {
       {loading ? (
         <h3>Loading...</h3>
       ) : error ? (
-        <Redirect>
+        <Redirect to='/pet-details-not-found'>
           <PetDetailsNotFound />
         </Redirect>
       ) : (

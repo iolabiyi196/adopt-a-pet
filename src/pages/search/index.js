@@ -1,31 +1,31 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import Hero from '../../components/hero';
-import { getPets } from '../../api/petfinder';
-import Pet from '../../components/pet';
+import React, { useState, useEffect, useMemo } from 'react'
+import Hero from '../../components/hero'
+import { getPets } from '../../api/petfinder'
+import Pet from '../../components/pet'
 
 // import useLocation here
+import { useLocation } from 'react-router'
 
 const SearchPage = () => {
-
   // Get the search value from useLocation() here
-  const search = 'REPLACE ME';
+  const { search } = useLocation()
 
-  const queryParams = useMemo(() => { 
-    return new URLSearchParams('REPLACE ME');
-  }, [search]);
+  const queryParams = useMemo(() => {
+    return new URLSearchParams(search)
+  }, [search])
 
-  const [pets, setPets] = useState([]);
+  const [pets, setPets] = useState([])
 
   useEffect(() => {
     async function getPetsData() {
-      const petNameToFind = 'REPLACE ME';
-      const petsData = await getPets('', petNameToFind);
+      const petNameToFind = queryParams.get('name')
+      const petsData = await getPets('', petNameToFind)
 
-      setPets(petsData);
+      setPets(petsData)
     }
 
-    getPetsData();
-  }, [queryParams]);
+    getPetsData()
+  }, [queryParams])
 
   return (
     <div className="page">
@@ -41,7 +41,7 @@ const SearchPage = () => {
         </div>
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default SearchPage;
+export default SearchPage
